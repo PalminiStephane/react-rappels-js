@@ -119,16 +119,6 @@ for(let i = 0; i < tennisPlayers.length; i++) {
 }
 */
 
-//Version One Liner
-const playersUnder30 = tennisPlayers.filter(player => player.age <= 30);
-const playersUnder30AndShortName = tennisPlayers.filter((player) => {
-
-    const under30 = player.age <= 30;
-    const shortName = player.name.length <= 5;
-
-    return player.age <=30 && player.name.length <= 5
-})
-
 //Version intermediaire fonction fleché avec le if developpé
 /*
 const playersUnder30 = tennisPlayers.filter((player) => {
@@ -139,4 +129,116 @@ const playersUnder30 = tennisPlayers.filter((player) => {
     }
 });
 */
+
+
+//Version One Liner
+const playersUnder30 = tennisPlayers.filter(player => player.age <= 30);
+
+//On assigne des valeurs booleenes pour séparer nos conditions
+const playersUnder30AndShortName = tennisPlayers.filter((player) => {
+    //D'abord, on évalue si l'âge est inférieur ou égal à 30
+    const under30 = player.age <= 30;
+    //Puis on évalue la longueur du nom
+    const shortName = player.name.length <= 5;
+
+    //Et on retourne si age < 30 ET nom court
+    return under30 && shortName;
+});
+
+console.log(tennisPlayers);
 console.log(playersUnder30);
+
+const playerIsUnder30 = (player) => player.age <= 30;
+const playerHasShortName =(player) => player.name.lenght <= 5;
+
+const playersUnder30ShortName = tennisPlayers.filter(playerIsUnder30)
+                                             .filter(playerHasShortName)
+                           
+console.log(playersUnder30ShortName);
+playersUnder30ShortName.forEach(player => {console.log(`Joueur restant : ${player.name}`)});
+
+console.log("=== .find dans un tableau ===");
+const drones = [
+    {
+        id: 1,
+        name: 'Parrot'
+    },
+    {
+        id: 2,
+        name: 'Dji Phantom'
+    },
+    {
+        id: 3,
+        name: 'Drone Drone'
+    },
+    {
+        id: 4,
+        name: 'Dronus Maximus'
+    },
+];
+
+/*
+const droneId3 = drones.filter((drone) => drone.id === 3)[0];
+console.log(droneId3);
+*/
+
+//.find sert à ne garder qu'un seul élément dans le tableau qui correspond
+//à la condition passée en valeur de retour du callback
+//Ici : on ne garde que le drone qui a un id de 3
+const droneId3 = drones.find((drone) => drone.id === 3);
+console.log(`le drone qui a un id de 3 est le ${droneId3.name}`);
+//console.log("le drone qui a un id est :");
+//console.log(droneId3);
+
+console.log("=== .map dans un tableau ===");
+//ca nous permets de transformer des resultats en chaine de caractères
+const dancers = [
+    {
+        firstName: 'Dancer',
+        lastName: 'Dancington',
+        age: 70
+    },
+    {
+        firstName: 'Kamel',
+        lastName: 'Ouali',
+        age: 27
+    },
+    {
+        firstName: 'Kamel',
+        lastName: 'Oualou',
+        age: 35
+    },
+    {
+        firstName: 'Mickael',
+        lastName: 'Jackson',
+        age: 200
+    },
+    {
+        firstName: 'Ouali',
+        lastName: 'Oualou',
+        age: 12
+    },
+];
+
+//.map servira à modifier tous les éléments d'un tableau un par un 
+//dans ce cas, on renvoie un tableau modifié qui contient un nouvel objet
+//fullName, la concaténation du firstName et lastName
+//et old, un booléen qui dit si le danceur a plus de 60 ans
+
+//Ca c'est génial pour formater nos retours d'API
+const formattedDancers = dancers.map((dancer) => {
+    return {
+        fullName:`${dancer.firstName}${dancer.lastName}`,
+        old: dancer.age >= 60
+    }
+});
+console.log(formattedDancers);
+
+const mappedDancers = dancers.map((dancer) => {
+    return `Bonjour je suis ${dancer.firstName} ${dancer.lastName} et j'ai ${dancer.age}`
+});
+console.log(dancers);
+console.log(mappedDancers);
+
+
+
